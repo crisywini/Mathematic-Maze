@@ -1,0 +1,30 @@
+package co.game.threads;
+
+import javax.sound.sampled.Clip;
+
+public class MusicThread extends Thread{
+
+	private Clip song;
+	private String path;
+	private int repeats;
+	public MusicThread() {
+	}
+	public Clip getSong() {
+		return song;
+	}
+	public void setSong(Clip song) {
+		this.song = song;
+	}
+	public String getPath() {
+		return path;
+	}
+	public void setPath(String path) {
+		this.path = path;
+	}
+	public int getRepeats() {
+		return repeats;
+	}
+	public void setRepeats(int repeats) {
+		this.repeats = repeats;
+	}
+}

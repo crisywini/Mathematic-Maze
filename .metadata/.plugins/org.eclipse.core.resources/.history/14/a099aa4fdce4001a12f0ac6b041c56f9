@@ -1,0 +1,67 @@
+package co.game.elements;
+
+import java.awt.Graphics;
+import java.awt.Point;
+import java.awt.Rectangle;
+
+import javax.swing.JComponent;
+
+public class Cell extends JComponent implements ICellConfiguration {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private boolean selectedCell = false;
+	public Rectangle cellRectangle;
+
+	private int x, y;
+
+	public Cell(int x, int y) {
+		this.x = x;
+		this.y = y;
+	}
+
+	public int getX() {
+		return x;
+	}
+
+	public void setX(int x) {
+		this.x = x;
+	}
+
+	public int getY() {
+		return y;
+	}
+
+	public void setY(int y) {
+		this.y = y;
+	}
+
+	@Override
+	protected void paintComponent(Graphics g) {
+		g.drawRect(x, y, WIDTH_CELL, HEIGHT_CELL);
+		if (selectedCell) {
+			g.fillRect(x, y, WIDTH_CELL, HEIGHT_CELL);
+		}
+	}
+
+	public void selectCell(int xp, int yp) {
+		if (cellRectangle.contains(new Point(xp, yp))) {
+			if (selectedCell) {
+				selectedCell = false;
+			} else {
+				selectedCell = true;
+			}
+		}
+	}
+
+	public boolean isSelectedCell() {
+		return selectedCell;
+	}
+
+	public void setSelectedCell(boolean selectedCell) {
+		this.selectedCell = selectedCell;
+	}
+
+}

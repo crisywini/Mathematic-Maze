@@ -1,0 +1,36 @@
+package co.game.main;
+
+import java.awt.BorderLayout;
+
+import javax.swing.JFrame;
+
+import co.game.elements.MyCanvas;
+
+public class Application extends JFrame{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
+	private MyCanvas canvas;
+	
+	
+	public Application() {
+		
+		this.canvas = new MyCanvas();
+		this.getContentPane().setLayout(new BorderLayout());
+		this.getContentPane().add(canvas);
+		this.setSize(canvas.getWidth(), canvas.getHeight());
+	}
+	
+
+	public MyCanvas getCanvas() {
+		return canvas;
+	}
+
+	public void setCanvas(MyCanvas canvas) {
+		this.canvas = canvas;
+	}
+
+}

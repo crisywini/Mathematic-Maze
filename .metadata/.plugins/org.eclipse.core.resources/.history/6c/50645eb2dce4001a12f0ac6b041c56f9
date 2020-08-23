@@ -1,0 +1,10 @@
+package co.game.elements;
+
+public enum Type {
+	
+	GAMMER,
+	ROAD,
+	OBSTACLE,
+	MATHEMATICIAN;
+
+}

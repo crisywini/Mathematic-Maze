@@ -1,0 +1,30 @@
+package co.game.elements;
+
+import java.awt.Canvas;
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.event.MouseEvent;
+
+public class MyCanvas extends Canvas {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	private Maze maze;
+
+	public MyCanvas() {
+		maze = new Maze();
+		this.setBackground(Color.YELLOW);
+		this.setSize(maze.getWidth(), maze.getHeight());
+	}
+	@Override
+	public void paint(Graphics g) {
+		maze.paintComponent(g);
+	}
+	public void activateCells(MouseEvent me) {
+		
+	}
+
+}

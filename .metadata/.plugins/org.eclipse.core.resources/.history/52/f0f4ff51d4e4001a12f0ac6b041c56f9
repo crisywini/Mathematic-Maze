@@ -1,0 +1,46 @@
+package co.game.elements;
+
+import javax.swing.JComponent;
+
+public class Maze extends JComponent implements ICellConfiguration{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private int widthMaze, heightMaze;
+	private Cell[][] cells;
+	
+	public Maze() {
+		cells = new Cell[WIDTH_VIRTUAL_WORLD][HEIGHT_VIRTUAL_WORLD];
+		for (int i = 0; i < cells.length; i++) {
+			for (int j = 0; j < cells[i].length; j++) {
+				
+			}
+		}
+	}
+	
+	
+	public int getHeightMaze() {
+		return heightMaze;
+	}
+	public void setHeightMaze(int heightMaze) {
+		this.heightMaze = heightMaze;
+	}
+	public int getWidthMaze() {
+		return widthMaze;
+	}
+	public void setWidthMaze(int weidthMaze) {
+		this.widthMaze = weidthMaze;
+	}
+	public Cell[][] getCells() {
+		return cells;
+	}
+	public void setCells(Cell[][] cells) {
+		this.cells = cells;
+	}
+	
+	
+	
+
+}

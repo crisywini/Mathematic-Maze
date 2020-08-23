@@ -1,0 +1,120 @@
+package co.game.elements;
+
+import java.awt.Graphics;
+import java.awt.event.KeyEvent;
+
+import javax.swing.JComponent;
+
+public class Maze extends JComponent implements ICellConfiguration {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private int widthMaze, heightMaze;
+	private Cell[][] cells;
+	public Cell movedCell;
+
+	public Maze() {
+		cells = new Cell[WIDTH_VIRTUAL_WORLD][HEIGHT_VIRTUAL_WORLD];
+		for (int i = 0; i < cells.length; i++) {
+			for (int j = 0; j < cells[i].length; j++) {
+				cells[i][j] = new Cell(i + (i * WIDTH_CELL), j + (j * HEIGHT_CELL));
+			}
+		}
+		movedCell = new Cell(0, 0);
+		cells[movedCell.getX()][movedCell.getY()].setSelectedCell(true); // Indicar que ha sido seleccionada para
+																			// moverla
+		this.widthMaze = WIDTH_VIRTUAL_WORLD * WIDTH_CELL;
+		this.heightMaze = HEIGHT_VIRTUAL_WORLD * HEIGHT_CELL;
+		this.setSize(widthMaze, heightMaze);
+	}
+
+	public void moveCell(KeyEvent event) {
+		switch (event.getKeyCode()) {
+		case KeyEvent.VK_UP:
+			System.out.println("UP");
+			moveCellUp();
+			break;
+		case KeyEvent.VK_DOWN:
+			System.out.println("DOWN");
+			moveCellDown();
+			break;
+		case KeyEvent.VK_LEFT:
+			System.out.println("LEFT");
+			moveCellLeft();
+			break;
+		case KeyEvent.VK_RIGHT:
+			System.out.println("RIGHT");
+			break;
+		}
+	}
+
+	private void moveCellUp() {
+		if (movedCell.getY() > 0) {
+			cells[movedCell.getX()][movedCell.getY()].setSelectedCell(false);
+			movedCell.setY(movedCell.getY() - 1);
+			cells[movedCell.getX()][movedCell.getY()].setSelectedCell(true);
+		}
+	}
+
+	private void moveCellDown() {
+		if (movedCell.getY() < HEIGHT_SCREEN) {
+			cells[movedCell.getX()][movedCell.getY()].setSelectedCell(false);
+			movedCell.setY(movedCell.getY() + 1);
+			cells[movedCell.getX()][movedCell.getY()].setSelectedCell(true);
+		}
+	}
+
+	private void moveCellLeft() {
+		if (movedCell.getX() > 0) {
+			cells[movedCell.getX()][movedCell.getY()].setSelectedCell(false);
+			movedCell.setY(movedCell.getX() - 1);
+			cells[movedCell.getX()][movedCell.getY()].setSelectedCell(true);
+		}
+	}
+
+	private void moveCellRight() {
+		if (movedCell.getX() < WIDTH_SCREEN) {
+			cells[movedCell.getX()][movedCell.getY()].setSelectedCell(false);
+			movedCell.setY(movedCell.getX() + 1);
+			cells[movedCell.getX()][movedCell.getY()].setSelectedCell(true);
+		}
+	}
+
+	@Override
+	protected void paintComponent(Graphics g) {
+
+		for (int i = 0; i < WIDTH_VIRTUAL_WORLD; i++) {
+			for (int j = 0; j < HEIGHT_VIRTUAL_WORLD; j++) {
+				cells[i][j].paintComponent(g);
+			}
+		}
+
+	}
+
+	public int getHeightMaze() {
+		return heightMaze;
+	}
+
+	public void setHeightMaze(int heightMaze) {
+		this.heightMaze = heightMaze;
+	}
+
+	public int getWidthMaze() {
+		return widthMaze;
+	}
+
+	public void setWidthMaze(int weidthMaze) {
+		this.widthMaze = weidthMaze;
+	}
+
+	public Cell[][] getCells() {
+		return cells;
+	}
+
+	public void setCells(Cell[][] cells) {
+		this.cells = cells;
+	}
+
+}

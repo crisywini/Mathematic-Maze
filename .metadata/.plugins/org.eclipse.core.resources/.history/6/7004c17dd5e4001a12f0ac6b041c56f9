@@ -1,0 +1,9 @@
+package co.game.elements;
+
+public interface ICellConfiguration {
+	public final int WIDTH_CELL = 64;
+	public final int HEIGHT_CELL = 64;
+	public final int WIDTH_VIRTUAL_WORLD = 5;
+	public final int HEIGHT_VIRTUAL_WORLD = 3;
+
+}

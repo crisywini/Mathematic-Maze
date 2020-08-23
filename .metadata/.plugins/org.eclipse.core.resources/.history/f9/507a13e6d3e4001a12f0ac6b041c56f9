@@ -1,0 +1,15 @@
+package co.game.elements;
+
+import javax.swing.JComponent;
+
+public class Maze extends JComponent implements ICellConfiguration{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private int weidthMaze, heightMaze;
+	private Cell[][] cells;
+	
+
+}

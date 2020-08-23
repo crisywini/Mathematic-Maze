@@ -1,0 +1,7 @@
+package co.game.elements;
+
+import javax.swing.JComponent;
+
+public class Maze extends JComponent implements ICellConfiguration{
+
+}
