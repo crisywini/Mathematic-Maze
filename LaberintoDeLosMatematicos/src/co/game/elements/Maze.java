@@ -84,6 +84,8 @@ public class Maze extends JComponent implements ICellConfiguration {
 			cells[movedCell.getX()][movedCell.getY()].setType(Type.ROAD);
 			movedCell.setY(movedCell.getY() - 1);
 			cells[movedCell.getX()][movedCell.getY()].setType(Type.STUDENT);
+			cells[movedCell.getX()][movedCell.getY()].setIndexSprite(8);
+
 		}
 	}
 
@@ -93,22 +95,26 @@ public class Maze extends JComponent implements ICellConfiguration {
 
 			movedCell.setY(movedCell.getY() + 1);
 			cells[movedCell.getX()][movedCell.getY()].setType(Type.STUDENT);
+			cells[movedCell.getX()][movedCell.getY()].setIndexSprite(0);
+
 		}
 	}
 
 	private void moveCellLeft() {
-		if (movedCell.getX()> 0 && movedCell.getX() < WIDTH_VIRTUAL_WORLD) {
+		if (movedCell.getX() > 0 && movedCell.getX() < WIDTH_VIRTUAL_WORLD) {
 			cells[movedCell.getX()][movedCell.getY()].setType(Type.ROAD);
-			movedCell.setY(movedCell.getX() - 1);
+			movedCell.setX(movedCell.getX() - 1);
 			cells[movedCell.getX()][movedCell.getY()].setType(Type.STUDENT);
+			cells[movedCell.getX()][movedCell.getY()].setIndexSprite(4);
 		}
 	}
 
 	private void moveCellRight() {
 		if (movedCell.getX() + 1 < WIDTH_VIRTUAL_WORLD) {
 			cells[movedCell.getX()][movedCell.getY()].setType(Type.ROAD);
-			movedCell.setY(movedCell.getX() + 1);
+			movedCell.setX(movedCell.getX() + 1);
 			cells[movedCell.getX()][movedCell.getY()].setType(Type.STUDENT);
+			cells[movedCell.getX()][movedCell.getY()].setIndexSprite(12);
 		}
 	}
 

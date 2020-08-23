@@ -3,8 +3,8 @@ INDEX VERSION 1.131+C:\Users\Crisi\Desktop\LaberintoMatematico\Laberinto\Workspa
 1502919148.index
 3898599632.index
 1289699494.index
-2341294296.index
 1322958611.index
+2341294296.index
 288477893.index
 416869917.index
 4029164763.index

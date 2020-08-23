@@ -17,6 +17,9 @@ public class Cell extends JComponent implements ICellConfiguration {
 	private static final long serialVersionUID = 1L;
 	private boolean selectedCell = false;
 	public Rectangle cellRectangle;
+	// Sprites
+	private int indexSprite;
+	private BufferedImage sprites[], spriteImage;
 
 	private Type type;
 	public BufferedImage student, obstacle, road, mathematician;
@@ -27,12 +30,23 @@ public class Cell extends JComponent implements ICellConfiguration {
 		this.x = x;
 		this.y = y;
 		this.setType(type);
+		indexSprite = 4;
 		try {
-			student = ImageIO.read(Cell.class.getResource("/images/personaje1.png"));
+//			student = ImageIO.read(Cell.class.getResource("/images/personaje1.png"));
 			mathematician = ImageIO.read(Cell.class.getResource("/images/mathematician.png"));
 //			road = ImageIO.read(Cell.class.getResource("/images/road.png"));
 //			obstacle = ImageIO.read(Cell.class.getResource("/images/obstacle.png"));
 			obstacle = ImageIO.read(Cell.class.getResource("/images/stone.png"));
+			// Load the image
+			spriteImage = ImageIO.read(Cell.class.getResource("/images/george.png"));
+			sprites = new BufferedImage[4 * 4];
+			for (int i = 0; i < 4; i++) {
+				for (int j = 0; j < 4; j++) {
+					sprites[(i * 4) + j] = spriteImage.getSubimage(i * WIDTH_CELL, j * HEIGHT_CELL, WIDTH_CELL,
+							HEIGHT_CELL);
+				}
+			}
+			student = sprites[indexSprite];
 
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -59,7 +73,7 @@ public class Cell extends JComponent implements ICellConfiguration {
 	public void update(Graphics g) {
 		switch (type) {
 		case STUDENT:
-			g.drawImage(student, x, y, null);
+			g.drawImage(sprites[indexSprite], x, y, null);
 			break;
 		case MATHEMATICIAN:
 			g.drawImage(mathematician, x, y, null);
@@ -133,6 +147,30 @@ public class Cell extends JComponent implements ICellConfiguration {
 
 	public void setType(Type type) {
 		this.type = type;
+	}
+
+	public int getIndexSprite() {
+		return indexSprite;
+	}
+
+	public void setIndexSprite(int indexSprite) {
+		this.indexSprite = indexSprite;
+	}
+
+	public BufferedImage[] getSprites() {
+		return sprites;
+	}
+
+	public void setSprites(BufferedImage sprites[]) {
+		this.sprites = sprites;
+	}
+
+	public BufferedImage getSpriteImage() {
+		return spriteImage;
+	}
+
+	public void setSpriteImage(BufferedImage spriteImage) {
+		this.spriteImage = spriteImage;
 	}
 
 }
