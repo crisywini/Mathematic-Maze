@@ -11,12 +11,15 @@ public class Maze extends JComponent implements ICellConfiguration {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private final Type MAZE_OPTIONS[] = { Type.MATHEMATICIAN, Type.OBSTACLE, Type.ROAD, Type.STUDENT };
+//	private final Type MAZE_OPTIONS[] = { Type.MATHEMATICIAN, Type.OBSTACLE, Type.ROAD, Type.STUDENT };
 	private int widthMaze, heightMaze;
 	private Cell[][] cells;
 	public Cell movedCell;
 
-	public Maze() {
+	private MyCanvas myCanvas;
+
+	public Maze(MyCanvas canvas) {
+		this.myCanvas = canvas;
 		cells = new Cell[WIDTH_VIRTUAL_WORLD][HEIGHT_VIRTUAL_WORLD];
 		this.widthMaze = WIDTH_VIRTUAL_WORLD * WIDTH_CELL;
 //		initDefaultMaze();
@@ -51,70 +54,126 @@ public class Maze extends JComponent implements ICellConfiguration {
 				}
 			}
 		}
+		cells[13][0].setType(Type.OBSTACLE);
+		cells[13][1].setType(Type.OBSTACLE);
+		cells[13][2].setType(Type.OBSTACLE);
+		cells[12][2].setType(Type.OBSTACLE);
+		cells[11][2].setType(Type.OBSTACLE);
+		cells[10][2].setType(Type.OBSTACLE);
+		
+		cells[9][2].setType(Type.OBSTACLE);
+		cells[8][2].setType(Type.OBSTACLE);
+		cells[8][3].setType(Type.OBSTACLE);
+		cells[8][4].setType(Type.OBSTACLE);
+		cells[7][5].setType(Type.OBSTACLE);
+		cells[7][6].setType(Type.OBSTACLE);
+		
+		cells[8][6].setType(Type.OBSTACLE);
+		cells[9][6].setType(Type.OBSTACLE);
+		cells[10][6].setType(Type.OBSTACLE);
+		cells[11][6].setType(Type.OBSTACLE);
+		cells[12][6].setType(Type.OBSTACLE);
+		cells[13][6].setType(Type.OBSTACLE);
+
+		cells[14][6].setType(Type.OBSTACLE);
+		cells[8][3].setType(Type.OBSTACLE);
+		cells[7][3].setType(Type.OBSTACLE);
+		cells[6][3].setType(Type.OBSTACLE);
+		cells[9][7].setType(Type.OBSTACLE);
+		for (int i = 0; i < 10; i++) {
+			cells[5][i].setType(Type.OBSTACLE);
+		}
+		cells[4][5].setType(Type.OBSTACLE);
+		cells[3][5].setType(Type.OBSTACLE);
+		for (int i = 0; i < 8; i++) {
+			cells[3][i].setType(Type.OBSTACLE);
+		}
+		cells[2][7].setType(Type.OBSTACLE);
+		cells[1][7].setType(Type.OBSTACLE);
+
+		cells[1][3].setType(Type.OBSTACLE);
+		cells[2][3].setType(Type.OBSTACLE);
+		
+		
 		movedCell = new Cell(14, 0, Type.STUDENT);
 //		cells[movedCell.getX()][movedCell.getY()].setSelectedCell(true); // Indicar que ha sido seleccionada para
 		// moverla
 		cells[movedCell.getX()][movedCell.getY()].setType(Type.STUDENT);
-		cells[13][0].setType(Type.ROAD);
+//		cells[13][0].setType(Type.ROAD);
+		cells[14][0].setType(Type.ROAD);
+		
 	}
 
 	public void moveCell(KeyEvent event) {
 		switch (event.getKeyCode()) {
 		case KeyEvent.VK_UP:
 			System.out.println("UP");
-			moveCellUp();
+//			moveCellUp();
+			myCanvas.getStudent().moveUp();
 			break;
 		case KeyEvent.VK_DOWN:
 			System.out.println("DOWN");
-			moveCellDown();
+//			moveCellDown();
+			myCanvas.getStudent().moveDown();
 			break;
 		case KeyEvent.VK_LEFT:
 			System.out.println("LEFT");
-			moveCellLeft();
+//			moveCellLeft();
+			myCanvas.getStudent().moveLeft();
 			break;
 		case KeyEvent.VK_RIGHT:
 			System.out.println("RIGHT");
-			moveCellRight();
+//			moveCellRight();
+			myCanvas.getStudent().moveRight();
 			break;
 		}
 	}
 
 	private void moveCellUp() {
 		if (movedCell.getY() > 0) {
-			cells[movedCell.getX()][movedCell.getY()].setType(Type.ROAD);
-			movedCell.setY(movedCell.getY() - 1);
-			cells[movedCell.getX()][movedCell.getY()].setType(Type.STUDENT);
-			cells[movedCell.getX()][movedCell.getY()].setIndexSprite(8);
+			if (cells[movedCell.getX()][movedCell.getY() - 1].getType() != Type.OBSTACLE) {
 
+				cells[movedCell.getX()][movedCell.getY()].setType(Type.ROAD);
+				movedCell.setY(movedCell.getY() - 1);
+				cells[movedCell.getX()][movedCell.getY()].setType(Type.STUDENT);
+				cells[movedCell.getX()][movedCell.getY()].setIndexSprite(8);
+			}
 		}
 	}
 
 	private void moveCellDown() {
 		if (movedCell.getY() + 1 < HEIGHT_VIRTUAL_WORLD) {
-			cells[movedCell.getX()][movedCell.getY()].setType(Type.ROAD);
+			if (cells[movedCell.getX()][movedCell.getY() + 1].getType() != Type.OBSTACLE) {
 
-			movedCell.setY(movedCell.getY() + 1);
-			cells[movedCell.getX()][movedCell.getY()].setType(Type.STUDENT);
-			cells[movedCell.getX()][movedCell.getY()].setIndexSprite(0);
+				cells[movedCell.getX()][movedCell.getY()].setType(Type.ROAD);
 
+				movedCell.setY(movedCell.getY() + 1);
+				cells[movedCell.getX()][movedCell.getY()].setType(Type.STUDENT);
+				cells[movedCell.getX()][movedCell.getY()].setIndexSprite(0);
+			}
 		}
 	}
 
 	private void moveCellLeft() {
 		if (movedCell.getX() > 0 && movedCell.getX() < WIDTH_VIRTUAL_WORLD) {
-			cells[movedCell.getX()][movedCell.getY()].setType(Type.ROAD);
-			movedCell.setX(movedCell.getX() - 1);
-			cells[movedCell.getX()][movedCell.getY()].setType(Type.STUDENT);
-			cells[movedCell.getX()][movedCell.getY()].setIndexSprite(4);
+			if (cells[movedCell.getX() - 1][movedCell.getY()].getType() != Type.OBSTACLE) {
+				cells[movedCell.getX()][movedCell.getY()].setType(Type.ROAD);
+				movedCell.setX(movedCell.getX() - 1);
+				cells[movedCell.getX()][movedCell.getY()].setType(Type.STUDENT);
+				cells[movedCell.getX()][movedCell.getY()].setIndexSprite(4);
+			}
 		}
 	}
 
 	private void moveCellRight() {
 		if (movedCell.getX() + 1 < WIDTH_VIRTUAL_WORLD) {
-			cells[movedCell.getX()][movedCell.getY()].setType(Type.ROAD);
-			movedCell.setX(movedCell.getX() + 1);
-			cells[movedCell.getX()][movedCell.getY()].setType(Type.STUDENT);
-			cells[movedCell.getX()][movedCell.getY()].setIndexSprite(12);
+			if (cells[movedCell.getX() + 1][movedCell.getY()].getType() != Type.OBSTACLE) {
+
+				cells[movedCell.getX()][movedCell.getY()].setType(Type.ROAD);
+				movedCell.setX(movedCell.getX() + 1);
+				cells[movedCell.getX()][movedCell.getY()].setType(Type.STUDENT);
+				cells[movedCell.getX()][movedCell.getY()].setIndexSprite(12);
+			}
 		}
 	}
 
@@ -155,6 +214,14 @@ public class Maze extends JComponent implements ICellConfiguration {
 
 	public void setCells(Cell[][] cells) {
 		this.cells = cells;
+	}
+
+	public MyCanvas getMyCanvas() {
+		return myCanvas;
+	}
+
+	public void setMyCanvas(MyCanvas myCanvas) {
+		this.myCanvas = myCanvas;
 	}
 
 }

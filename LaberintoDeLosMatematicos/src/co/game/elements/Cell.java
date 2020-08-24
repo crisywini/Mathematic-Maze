@@ -20,6 +20,10 @@ public class Cell extends JComponent implements ICellConfiguration {
 	// Sprites
 	private int indexSprite;
 	private BufferedImage sprites[], spriteImage;
+	
+	private int indexSpriteMath;
+	private BufferedImage spritesMath[], spriteImageMath;
+	
 
 	private Type type;
 	public BufferedImage student, obstacle, road, mathematician;
@@ -31,6 +35,7 @@ public class Cell extends JComponent implements ICellConfiguration {
 		this.y = y;
 		this.setType(type);
 		indexSprite = 4;
+		indexSpriteMath = 1;
 		try {
 //			student = ImageIO.read(Cell.class.getResource("/images/personaje1.png"));
 			mathematician = ImageIO.read(Cell.class.getResource("/images/mathematician.png"));
@@ -47,6 +52,15 @@ public class Cell extends JComponent implements ICellConfiguration {
 				}
 			}
 			student = sprites[indexSprite];
+			spriteImageMath = ImageIO.read(Cell.class.getResource("/images/mathematician1.png"));
+			spritesMath = new BufferedImage[4*3];
+			for (int i = 0; i < 3; i++) {
+				for (int j = 0; j <4; j++) {
+					spritesMath[(i * 4) + j] = spriteImageMath.getSubimage(i * WIDTH_CELL_MATH, j * HEIGHT_CELL_MATH, WIDTH_CELL_MATH,
+							HEIGHT_CELL_MATH);	
+				}
+			}
+			mathematician = spritesMath[indexSpriteMath];
 
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -76,7 +90,7 @@ public class Cell extends JComponent implements ICellConfiguration {
 			g.drawImage(sprites[indexSprite], x, y, null);
 			break;
 		case MATHEMATICIAN:
-			g.drawImage(mathematician, x, y, null);
+			g.drawImage(spritesMath[indexSpriteMath], x, y, null);
 			break;
 		case OBSTACLE:
 			g.drawImage(obstacle, x, y, null);
@@ -171,6 +185,30 @@ public class Cell extends JComponent implements ICellConfiguration {
 
 	public void setSpriteImage(BufferedImage spriteImage) {
 		this.spriteImage = spriteImage;
+	}
+
+	public int getIndexSpriteMath() {
+		return indexSpriteMath;
+	}
+
+	public void setIndexSpriteMath(int indexSpriteMath) {
+		this.indexSpriteMath = indexSpriteMath;
+	}
+
+	public BufferedImage[] getSpritesMath() {
+		return spritesMath;
+	}
+
+	public void setSpritesMath(BufferedImage spritesMath[]) {
+		this.spritesMath = spritesMath;
+	}
+
+	public BufferedImage getSpriteImageMath() {
+		return spriteImageMath;
+	}
+
+	public void setSpriteImageMath(BufferedImage spriteImageMath) {
+		this.spriteImageMath = spriteImageMath;
 	}
 
 }

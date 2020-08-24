@@ -26,7 +26,7 @@ public class Application extends JFrame implements ICellConfiguration{
 		this.getContentPane().add(canvas);
 		this.setSize(canvas.getWidth()*2, canvas.getHeight()*2);
 		musicThread = new MusicThread(PATH+"/resources/music/AfricanSafariLoop.wav", 2);
-		musicThread.run();
+		//musicThread.run();
 	}
 
 	public MyCanvas getCanvas() {

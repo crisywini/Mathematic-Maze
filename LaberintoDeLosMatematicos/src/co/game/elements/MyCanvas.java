@@ -9,6 +9,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.io.IOException;
+import java.util.Timer;
 
 import javax.imageio.ImageIO;
 
@@ -21,12 +22,17 @@ public class MyCanvas extends Canvas implements ICellConfiguration {
 
 	private Image backgroundImage;
 	private Maze maze;
-	//Double buffer
+	// Double buffer
 	public Graphics bufferGraphic;
 	public Image bufferImage;
+	// Animations
+	private Timer tasker;
+	private Mathematician[] mathematicians;
+	private Student student;
 
 	public MyCanvas() {
-		maze = new Maze();
+		maze = new Maze(this);
+		student = new Student(maze);
 		try {
 			backgroundImage = ImageIO.read(MyCanvas.class.getResource("/images/background4.jpg"));
 		} catch (IOException e) {
@@ -41,12 +47,31 @@ public class MyCanvas extends Canvas implements ICellConfiguration {
 				repaint();
 			}
 		});
+		initMathematicians();
+		tasker = new Timer();
+
+	}
+
+	public void initMathematicians() {
+		mathematicians = new Mathematician[11];
+		mathematicians[0] = new Mathematician(maze, 8, 5);
+		mathematicians[1] = new Mathematician(maze, 6, 8);
+		mathematicians[2] = new Mathematician(maze, 1, 8);
+		mathematicians[3] = new Mathematician(maze, 4, 6);
+		mathematicians[4] = new Mathematician(maze, 4, 1);
+		mathematicians[5] = new Mathematician(maze, 9, 1);
+		mathematicians[6] = new Mathematician(maze, 2, 1);
+		mathematicians[7] = new Mathematician(maze, 1, 2);
+		mathematicians[8] = new Mathematician(maze, 12, 7);
+		mathematicians[9] = new Mathematician(maze, 13, 7);
+		mathematicians[10] = new Mathematician(maze, 14, 7);
+
 	}
 
 	@Override
 	public void update(Graphics g) {
-		
-		if(bufferGraphic==null) {
+
+		if (bufferGraphic == null) {
 			bufferImage = createImage(this.getWidth(), this.getHeight());
 			bufferGraphic = bufferImage.getGraphics();
 		}
@@ -57,6 +82,7 @@ public class MyCanvas extends Canvas implements ICellConfiguration {
 		g.drawImage(bufferImage, 0, 0, null);
 //		maze.paintComponent(g);
 	}
+
 	@Override
 	public void paint(Graphics g) {
 		update(g);
@@ -83,6 +109,30 @@ public class MyCanvas extends Canvas implements ICellConfiguration {
 
 	public void setBackgroundImage(Image backgroundImage) {
 		this.backgroundImage = backgroundImage;
+	}
+
+	public Timer getTasker() {
+		return tasker;
+	}
+
+	public void setTasker(Timer tasker) {
+		this.tasker = tasker;
+	}
+
+	public Student getStudent() {
+		return student;
+	}
+
+	public void setStudent(Student student) {
+		this.student = student;
+	}
+
+	public Mathematician[] getMathematicians() {
+		return mathematicians;
+	}
+
+	public void setMathematicians(Mathematician[] mathematicians) {
+		this.mathematicians = mathematicians;
 	}
 
 }
